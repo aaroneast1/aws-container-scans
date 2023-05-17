@@ -6,14 +6,14 @@ The project triggers a codebuild job to scan an image when certain ECR, ECS even
 
 ### ECR Push
 
-````json
+```json
 {
   "source": ["aws.ecr"],
   "detail-type": ["ECR Image Action"],
   "detail": {
     "action-type":["PUSH"],
     "result": ["SUCCESS"]
-    }
+  }
 }
 ```
 
