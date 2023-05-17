@@ -1,0 +1,8 @@
+.terraform*
+terraform.tfstate
+terraform.tfstate.backup
+scan-logs
+sysdig-cli-scanner
+staging
+main.db.meta.json
+main.db

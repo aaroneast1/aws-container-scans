@@ -1,0 +1,10 @@
+{
+  "Messages": [
+    {
+      "MessageId": "e2570029-92b9-4ff8-9bd0-205c353cb0c8",
+      "ReceiptHandle": "AQEBOB9nKDF2/RlXwCfgktTahyz0dTMNutYKa8NsC0dGbphIHgSEUoZBkbsFuYCW+5Jrpyj5Xva13OlDfIeXxWhCb9fFYFr+juznawzY1vpYk/h6TJAJqk3NzuJK2+1JyL4LeI6S+op9XN8P+fdDRNvK30rnZl3SutP2Bq+ndTJbtW41GOCSgLLWUoBBTCttCnhW8S1Zhhol4n5cxU6RxVwtwfJi/GaNzDrvxDUpRJTsQmlf5uepDBE69Xb9MLyr7bl3H2gocQlUitvwbnVAVe2dFfftN5xBm7/USI/uKUPxe4TTkxxKSuh6zwHGhhkCxghdNI8zpneWBx8oBX2MVJgNuecx6nEamAGMqf8nef29bSuS2PpTzs6JsPjEC6ZuWTKtLcm1kj6rH26jfJUd8TjW8A==",
+      "MD5OfBody": "3f018246f7a1ed91c4aa20b657193167",
+      "Body": "{\"version\":\"0\",\"id\":\"0b086b37-b60c-b0a4-0abe-b8d87896d084\",\"detail-type\":\"ECR Image Action\",\"source\":\"aws.ecr\",\"account\":\"123456789000\",\"time\":\"2023-05-17T12:41:22Z\",\"region\":\"eu-central-1\",\"resources\":[],\"detail\":{\"result\":\"SUCCESS\",\"repository-name\":\"node\",\"image-digest\":\"sha256:7df7f0f3533fd481cbc87efd96824321abac9072c8e1adf8cf2cf8299d7a54ce\",\"action-type\":\"PUSH\",\"artifact-media-type\":\"application/vnd.docker.container.image.v1+json\",\"image-tag\":\"16-bullseye\",\"manifest-media-type\":\"application/vnd.docker.distribution.manifest.v2+json\"}}"
+    }
+  ]
+}
