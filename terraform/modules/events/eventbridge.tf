@@ -32,13 +32,7 @@ module "eventbridge" {
   }
 
   targets = {
-    ecr-events = [
-      
-      {
-        name = "${var.name}-service-ecr"
-        arn  = var.codebuild_project_arn
-        attach_role_arn = aws_iam_role.codebuid_trigger_role.arn
-      },
+    ecr-events = [ 
       {
         name            = "${var.name}-ecr-events"
         arn             = aws_sqs_queue.sqs_sysdig_queue.arn
@@ -46,11 +40,6 @@ module "eventbridge" {
       }
     ]
     ecs-events = [
-      {
-        name = "${var.name}-service-ecs"
-        arn  = var.codebuild_project_arn
-        attach_role_arn = aws_iam_role.codebuid_trigger_role.arn
-      },
       {
         name            = "${var.name}-ecs-events"
         arn             = aws_sqs_queue.sqs_sysdig_queue.arn

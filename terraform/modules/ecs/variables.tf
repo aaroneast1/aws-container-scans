@@ -20,7 +20,7 @@ variable "vpc_subnets_private_ids" {
 }
 variable "image" {
   type = string
-  default = "aaroneast1/cloudconnector:latest"
+  default = "aaroneast1/cloudconector:2.0"
 }
 variable "codebuild_project_name" {
   type = string
@@ -40,7 +40,6 @@ variable "sysdig_secure_url" {
 }
 variable "sqs_queue_name" {
   type = string
-  default = ""
 }
 
 variable "tags" {
