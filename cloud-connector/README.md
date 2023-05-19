@@ -11,10 +11,10 @@ docker buildx build -f Dockerfile -t cloudconnector .
 # Tag
 image_id=
 image_tag=
-docker ${image_id} aaroneast1/cloudconnector:${image_tag}
+docker tag ${image_id} aaroneast1/cloudconnector:${image_tag}
 
 # Publish
-docker publish aaroneast1/cloudconnector:${image_tag}
+docker push aaroneast1/cloudconnector:${image_tag}
 
 # Run container
 docker run -e AWS_ACCESS_KEY_ID=${value} -e AWS_SECRET_ACCESS_KEY=${value}  -e AWS_DEFAULT_REGION="${value} " -e REGION="${value} " -e ACCOUNT_ID="${value} " -e SQS_QUEUE_NAME="${value} " -e CODEBUILD_PROJECT_NAME="${value} " cloudconnector:latest
