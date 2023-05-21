@@ -20,7 +20,7 @@ variable "vpc_subnets_private_ids" {
 }
 variable "image" {
   type = string
-  default = "071631413357.dkr.ecr.eu-central-1.amazonaws.com/cloudconnector:2.3"
+  # default = ""
 }
 variable "codebuild_project_name" {
   type = string

@@ -8,8 +8,8 @@ module "codebuild" {
   name   = "scc"
   codebuild_environment_variables = [
     { "name":"PROJECT_NAME","value":"scc" },
-    { "name":"ACCOUNT_ID","value":"0123456789000"},
-    { "name":"REGION","value":"eu-central-1"}
+    { "name":"ACCOUNT_ID","value":"{value}"},
+    { "name":"REGION","value":"{value}"}
   ]
 }
 
@@ -25,10 +25,11 @@ module "ecs" {
   vpc_subnets_private_ids = module.vpc.private_subnets_ids
   codebuild_project_name  = module.codebuild.project_name
   codebuild_project_arn   = module.codebuild.project_arn
-  account_id              = "0123456789000"
-  region                  = "eu-central-1"
+  account_id              = "{value}"
+  region                  = "{value}"
   sysdig_secure_url       = "https://eu1.app.sysdig.com"
   events_sqs_url          = module.events.sqs_url
   events_sqs_arn          = module.events.sqs_arn
   sqs_queue_name          = "scc-service-events"
+  image                   = "{value}"
 }
