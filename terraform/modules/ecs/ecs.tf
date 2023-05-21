@@ -5,8 +5,8 @@ locals {
       value = tostring(var.codebuild_project_name)
     },
     {
-      name  = "SQS_QUEUE_NAME"
-      value = tostring(var.sqs_queue_name)
+      name  = "SQS_URL"
+      value = tostring(var.events_sqs_url)
     },
     {
       name  = "ACCOUNT_ID"

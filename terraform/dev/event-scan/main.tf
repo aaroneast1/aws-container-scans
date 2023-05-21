@@ -30,5 +30,5 @@ module "ecs" {
   sysdig_secure_url       = "https://eu1.app.sysdig.com"
   events_sqs_url          = module.events.sqs_url
   events_sqs_arn          = module.events.sqs_arn
-  # sqs_queue_name = "${var.name}-service-events"
+  sqs_queue_name          = "scc-service-events"
 }
