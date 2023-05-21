@@ -28,19 +28,23 @@ do
         ;;
 
       "aws.ecs")
+        ecs_service_name=$(echo "$sqs_message" | jq -r '.service')
+        ecs_service_arn="arn:aws:ecs:${REGION}:${ACCOUNT_ID}:service/${ecs_service_name}"
+        echo "ecs_service_name=${ecs_service_name} and ${ecs_service_arn}" 
         echo "Not yet implemented"
         ;;
     esac
 
     # Trigger Codebuild Job
     echo "REPOSITORY=[${REPOSITORY}] and VERSION=${VERSION}"
-    aws codebuild start-build --region "${REGION}" --project-name "${CODEBUILD_PROJECT_NAME}" --environment-variables-override "[{\"name\":\"REPOSITORY\",\"value\":\"${REPOSITORY}\",\"type\":\"PLAINTEXT\"},{\"name\":\"VERSION\",\"value\":\"${VERSION}\",\"type\":\"PLAINTEXT\"}]"
+    codebuild_ouput=$(aws codebuild start-build --region "${REGION}" --project-name "${CODEBUILD_PROJECT_NAME}" --environment-variables-override "[{\"name\":\"REPOSITORY\",\"value\":\"${REPOSITORY}\",\"type\":\"PLAINTEXT\"},{\"name\":\"VERSION\",\"value\":\"${VERSION}\",\"type\":\"PLAINTEXT\"}]")
 
     # Remove SQS Message
-    sqs_receipt_handle=$(echo "$sqs_message_arr" | jq -r '.ReceiptHandle')
+    sqs_receipt_handle=$(echo "$sqs_message_arr" | jq -r '.Messages[0].ReceiptHandle')
     echo "sqs_receipt_handle=${sqs_receipt_handle} removed"
     aws sqs delete-message --queue-url "${SQS_URL}" --receipt-handle "${sqs_receipt_handle}"
     
+    unset codebuild_ouput
     unset sqs_message_arr
     unset sqs_del_response_arr
     unset codebuild_response_arr
