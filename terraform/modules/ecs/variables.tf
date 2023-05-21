@@ -20,7 +20,7 @@ variable "vpc_subnets_private_ids" {
 }
 variable "image" {
   type = string
-  default = "aaroneast1/cloudconnector:2.1"
+  default = "aaroneast1/cloudconnector:2.3"
 }
 variable "codebuild_project_name" {
   type = string

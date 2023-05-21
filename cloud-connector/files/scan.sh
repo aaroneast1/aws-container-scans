@@ -28,10 +28,9 @@ do
         ;;
 
       "aws.ecs")
-        ecs_service_name=$(echo "$sqs_message" | jq -r '.service')
-        ecs_service_arn="arn:aws:ecs:${REGION}:${ACCOUNT_ID}:service/${ecs_service_name}"
-        echo "ecs_service_name=${ecs_service_name} and ${ecs_service_arn}" 
-        echo "Not yet implemented"
+        ecs_container=$(echo "$sqs_message_arr" | jq -r '.Messages[0].Body' | jq -r '.detail.containers[].image')
+        REPOSITORY=$(echo $ecs_container | cut -d ":" -f 1)
+        VERSION=$(echo $ecs_container | cut -d ":" -f 2)
         ;;
     esac
 
