@@ -131,36 +131,22 @@ data "aws_iam_policy_document" "task_definition_reader" {
   }
 }
 
-# image scanning - ecr
-# resource "aws_iam_role_policy" "ecr_reader" {
-#   count  = local.deploy_image_scanning ? 1 : 0
-#   name   = "ECRReader"
-#   role   = local.ecs_task_role_id
-#   policy = data.aws_iam_policy_document.ecr_reader[0].json
-# }
+# Pull image cloudconnector from ECR
+resource "aws_iam_role_policy" "ecr_reader" {
+  name   = "ECRReader"
+  role    = aws_iam_role.execution.id
+  policy = data.aws_iam_policy_document.ecr_reader.json
+}
 
-# data "aws_iam_policy_document" "ecr_reader" {
-#   count = local.deploy_image_scanning ? 1 : 0
-#   statement {
-#     effect = "Allow"
-#     actions = [
-#       "ecr:GetAuthorizationToken",
-#       "ecr:BatchCheckLayerAvailability",
-#       "ecr:GetDownloadUrlForLayer",
-#       "ecr:GetRepositoryPolicy",
-#       "ecr:DescribeRepositories",
-#       "ecr:ListImages",
-#       "ecr:DescribeImages",
-#       "ecr:BatchGetImage",
-#       "ecr:GetLifecyclePolicy",
-#       "ecr:GetLifecyclePolicyPreview",
-#       "ecr:ListTagsForResource",
-#       "ecr:DescribeImageScanFindings"
-#     ]
-#     resources = ["*"]
-#     # resources = var.is_organizational ? ["arn:aws:ecr:*:*:repository/*", "arn:aws:ecr-public::*:repository/*", "arn:aws:ecr-public::*:registry/*"] : ["arn:aws:ecr-public::${data.aws_caller_identity.me.account_id}:repository/*", "arn:aws:ecr-public::${data.aws_caller_identity.me.account_id}:repository/*", "arn:aws:ecr-public::${data.aws_caller_identity.me.account_id}:registry/*"]
-#   }
-# }
+data "aws_iam_policy_document" "ecr_reader" {
+  statement {
+    effect = "Allow"
+    actions = [
+      "ecr:*"
+    ]
+    resources = ["*"]
+  }
+}
 
 #---------------------------------
 # execution role

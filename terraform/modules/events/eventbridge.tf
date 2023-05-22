@@ -19,14 +19,18 @@ module "eventbridge" {
         "detail": {
           "action-type":["PUSH"],
           "result": ["SUCCESS"]
-          }
+        }
       })
     }
     ecs-events = {
       description   = "Capture all created service events",
       event_pattern = jsonencode({
         "source": ["aws.ecs"],
-        "detail-type": ["ECS Task State Change"]
+        "detail-type": ["ECS Task State Change"],
+        "detail": {
+          "lastStatus":["PENDING"],
+          "desiredStatus":["RUNNING"]
+        }
       })
     }
   }
