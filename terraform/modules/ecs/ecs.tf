@@ -30,10 +30,6 @@ locals {
 resource "aws_ecs_cluster" "ecs_cluster" {
   name = "${var.name}-events-cluster"
   tags = var.tags
-  #  setting {
-  #    name  = "containerInsights"
-  #    value = "enabled"
-  #  }
 }
 
 resource "aws_ecs_service" "service" {

@@ -17,22 +17,9 @@ phases:
       - aws ecr get-login-password --region ${REGION} | docker login --username AWS --password-stdin ${ACCOUNT_ID}.dkr.ecr.${REGION}.amazonaws.com
       - mkdir -p $CODEBUILD_SRC_DIR/staging/reports
       - chmod 777 $CODEBUILD_SRC_DIR/staging/reports
-      - |
-        if [[ "${CODEBUILD_INITIATOR}" == *"${RULE_NAME_MATCHER}"* ]]; then
-          echo "EventBridge trigger inspecting sqs queue for repo and version"
-          sqs_message_arr=$(aws sqs receive-message --queue-url https://sqs.${REGION}.amazonaws.com/${ACCOUNT_ID}/${SQS_QUEUE_NAME} --output json)
-          sqs_message=$(echo $sqs_message_arr | jq -r '.Messages[0].Body' | jq '.')
-          sqs_repo_name=$(echo $sqs_message | jq -r '.detail."repository-name"')
-          echo "Set vars and pull container"
-          REPOSITORY="${ACCOUNT_ID}.dkr.ecr.${REGION}.amazonaws.com/${sqs_repo_name}"
-          VERSION=$(echo $sqs_message | jq -r '.detail."image-tag"')
-          echo "repository=[${REPOSITORY}] and version=[${VERSION}]"
-          docker pull $REPOSITORY:$VERSION
-        else
-          echo "Manual trigger supplying repository=[${REPOSITORY}] and version=[${VERSION}]"
-          docker pull $REPOSITORY:$VERSION
-        fi
-
+      - echo "Triggered supplying repository=[${REPOSITORY}] and version=[${VERSION}]"
+      - docker pull $REPOSITORY:$VERSION
+      - echo "Commence Sysdig Secure Vulnerability scan"
       - ./sysdig-cli-scanner --apiurl=$SYSDIG_SECURE_ENDPOINT --output-json=staging/reports/sysdig-scan-report.json $REPOSITORY:$VERSION
   post_build:
     commands: 

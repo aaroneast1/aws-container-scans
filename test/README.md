@@ -18,9 +18,9 @@ aws ecr get-login-password --region ${region} | docker login --username AWS --pa
 ```sh
 export aws_account_id=
 export region=
-export image_id=
-export image_name=
-export image_tag=
+export image_id=9e176f4d5272
+export image_name=node
+export image_tag=17-bullseye-slim
 
 docker pull ${image_name}:${image_tag}
 docker tag ${image_id} ${aws_account_id}.dkr.ecr.${region}.amazonaws.com/${image_name}:${image_tag}
